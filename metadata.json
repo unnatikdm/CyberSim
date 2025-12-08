@@ -1,0 +1,5 @@
+{
+  "name": "Cyber Defense Simulator",
+  "description": "A strategic cybersecurity simulation game where players manage a budget to build defenses against randomized cyber attacks.",
+  "requestFramePermissions": []
+}
