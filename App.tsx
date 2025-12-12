@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Shield, Terminal, Cpu, Command, Activity, Play, AlertCircle, CheckCircle, Lock, Target, ChevronRight, Briefcase, RotateCcw, ArrowRight } from 'lucide-react';
 import { DEFENSES, INITIAL_BUDGET, MISSIONS } from './constants';
@@ -129,6 +130,7 @@ const App: React.FC = () => {
     isSimulating: false
   });
   const [integrity, setIntegrity] = useState(100);
+  const [selectedLibraryItem, setSelectedLibraryItem] = useState<string | null>(null);
   
   // Mission State
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
@@ -311,6 +313,8 @@ const App: React.FC = () => {
     setIsLoading(false);
   };
 
+  const availableDefenses = DEFENSES.filter(d => d.id !== 'internet');
+
   return (
     <div className="min-h-screen bg-black text-gray-200 font-sans selection:bg-cyber-blue/30 selection:text-white flex flex-col overflow-hidden">
       
@@ -380,18 +384,21 @@ const App: React.FC = () => {
             </div>
 
             {/* ASSET LIBRARY */}
-            <div className="flex-1 flex flex-col bg-gray-950 border border-gray-800 rounded-lg overflow-hidden shadow-lg min-h-0">
+            <div className="flex-1 flex flex-col bg-gray-950 border border-gray-800 rounded-lg overflow-hidden shadow-lg min-h-0 relative">
                 <div className="p-3 border-b border-gray-800 bg-gray-900 flex justify-between items-center flex-shrink-0">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                    <Cpu className="w-3 h-3 text-cyber-blue" /> Asset Library
+                       <Cpu className="w-3 h-3 text-cyber-blue" /> Asset Library
                     </span>
+                    <span className="text-[9px] bg-gray-800 px-1.5 rounded text-gray-500">{availableDefenses.length}</span>
                 </div>
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-2 bg-black/50">
-                    {DEFENSES.filter(d => d.id !== 'internet').map(defense => (
+                    {availableDefenses.map(defense => (
                     <DefenseCard
                         key={defense.id}
                         defense={defense}
                         canAfford={budgetRemaining >= defense.cost}
+                        isSelected={selectedLibraryItem === defense.id}
+                        onClick={setSelectedLibraryItem}
                     />
                     ))}
                 </div>

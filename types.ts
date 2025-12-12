@@ -1,4 +1,11 @@
 
+export interface DefenseSpecs {
+  throughput: string;
+  latency: string;
+  uptime: string;
+  protocol: string;
+}
+
 export interface Defense {
   id: string;
   name: string;
@@ -6,8 +13,9 @@ export interface Defense {
   description: string;
   blocks: string[]; // List of attack IDs it blocks
   layer: number; // Suggested layer (for auto-sort, optional now)
-  shape: 'box' | 'cylinder' | 'hexagon' | 'shield' | 'server' | 'cloud' | 'router'; 
+  shape: 'box' | 'cylinder' | 'hexagon' | 'shield' | 'server' | 'cloud' | 'router' | 'pyramid' | 'sphere' | 'diamond'; 
   defaultConnections?: string[]; // For auto-connecting
+  specs: DefenseSpecs; // New technical specs for hover details
 }
 
 export interface NodePosition {

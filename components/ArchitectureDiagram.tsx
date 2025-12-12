@@ -1,7 +1,7 @@
 
 import React, { useRef, useState } from 'react';
 import { CanvasNode } from '../types';
-import { Database as DbIcon, Shield, Lock, Server, Cloud, Router, Box, Cpu } from 'lucide-react';
+import { Database as DbIcon, Shield, Lock, Server, Cloud, Router, Box, Hexagon, Triangle, Circle, Disc, Diamond } from 'lucide-react';
 import { SimulationState } from '../App';
 
 interface ArchitectureDiagramProps {
@@ -46,9 +46,13 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({
       case 'cloud': return <Cloud {...props} />;
       case 'server': return <Server {...props} />;
       case 'cylinder': return <DbIcon {...props} />;
-      case 'hexagon': return <Shield {...props} />; // WAF
-      case 'shield': return <Lock {...props} />; // Encryption
+      case 'hexagon': return <Hexagon {...props} />;
+      case 'shield': return <Lock {...props} />;
       case 'router': return <Router {...props} />;
+      case 'pyramid': return <Triangle {...props} />;
+      case 'sphere': return <Circle {...props} />;
+      case 'diamond': return <Diamond {...props} />;
+      case 'disc': return <Disc {...props} />;
       case 'box': default: return <Box {...props} />;
     }
   };
